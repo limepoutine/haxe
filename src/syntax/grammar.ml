@@ -710,6 +710,8 @@ and parse_complex_type_inner allow_named s = match%parser s with
 		in
 		let p = punion p1 p2 in
 		CTPath (make_ptp (mk_type_path ~params:[TPType hint] (["haxe"],"Rest")) p),p
+	| [ (Kwd Default,p) ] ->
+		CTPath (make_ptp (mk_type_path (["$"],"_hx_default")) p),p
 	| [ dollar_ident as n ] ->
 		(match%parser s with
 		| [ (DblDot,_); parse_complex_type as t ] when allow_named->
